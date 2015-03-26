@@ -13,36 +13,6 @@ setup = function() {
 	}
 }
 
-##########################################################################################################
-##########################################################################################################
-
-creating.folders =  function(){
-
-	# Creating trace dir - populations stored
-	dirs = NULL;
-
-	# Creating folds dir - folds partitions
-	folds.dir = paste(DIR, "/folds", sep="");
-	if(!file.exists(folds.dir)){
-		cat(" - Creating folds dir (storing dataset partitions). \n");
-		dir.create(folds.dir);
-	}
-
-	# # Creating output dir (in database level)
-	out.dir = paste(DIR, "/results", sep="")
-	if(!file.exists(out.dir)){
-		cat(" - Creating output dir.\n");
-		dir.create(out.dir);
-	}
-
-	datasets.dir = paste(DIR, DATABASE, sep="");
-
-	dirs$folds.dir = folds.dir;
-	dirs$datasets.dir = datasets.dir;
-	dirs$out.dir = out.dir;
-
-	return(dirs);
-}
 
 ##########################################################################################################
 ##########################################################################################################
@@ -55,14 +25,22 @@ run = function() {
 	filename =  gsub("*\\.(\\w*)", "\\", file);
 
 	cat("@File:",filename, "\n");
+	cat("@Method:", METHOD, "\n");
 	data = read.arff(paste( dirs$datasets.dir, file, sep=""))
 
-	#Dataset with no Tbars 
-	# data = data[,c(1,2,3,4,5,7)]; # comentar para usar o Tbars
+	#Dataset with no Tbars
+	if(!TBARS){
+		cat(" ... not using Tbars attribute ... \n");
+		data = data[,c(1,2,3,4,5,7)]; # comentar para usar o Tbars
+	} 
 
-	exit = root(data, dirs, filename);
-	dump("exit", paste(dirs$out.dir, "/results.RData", sep=""));
-	write.table(x=exit, file=paste(dirs$out.dir, "/results.csv", sep=""));
+	exit = root(data, dirs);
+
+	#output files
+	files = output.files(dirs$out.dir)	
+
+	dump("exit",files$rdata);
+	write.table(x=exit, file=files$csv);
 
 }
 

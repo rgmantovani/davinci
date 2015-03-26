@@ -23,9 +23,9 @@ holdout = function(data, p){
 # LOO - leave one out
 oneout = function(data) {
 
-    id = kfold(data, k=nrow(data));
+    id = createFolds(data$Class, k=nrow(data), list=TRUE);
 
-    tran = lapply(1:nrow(data), function(i) {
+    train = lapply(1:nrow(data), function(i) {
         subset(data, id %in% setdiff(1:nrow(data), i));
     });
 
@@ -34,7 +34,7 @@ oneout = function(data) {
     });
 
     tmp = list();
-    tmp$tran = tran;
+    tmp$train = train;
     tmp$test = test;
     return(tmp);
 }

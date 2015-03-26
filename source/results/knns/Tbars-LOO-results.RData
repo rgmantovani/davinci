@@ -1,0 +1,14 @@
+exit <-
+structure(list(acc.mean = c(0.72, 0.72, 0.732, 0.752, 0.748, 
+0.752, 0.764, 0.772), acc.sd = c(0, 0, 0, 0, 0, 0, 0, 0), err.mean = c(0.28, 
+0.28, 0.268, 0.248, 0.252, 0.248, 0.236, 0.228), err.sd = c(0, 
+0, 0, 0, 0, 0, 0, 0), prec.mean = c(0.727, 0.727, 0.74, 0.759, 
+0.755, 0.759, 0.771, 0.779), prec.sd = c(0, 0, 0, 0, 0, 0, 0, 
+0), recall.mean = c(0.721, 0.721, 0.732, 0.752, 0.75, 0.753, 
+0.767, 0.775), recall.sd = c(0, 0, 0, 0, 0, 0, 0, 0), fsc.mean = c(0.723, 
+0.723, 0.733, 0.752, 0.749, 0.752, 0.765, 0.774), fsc.sds = c(0, 
+0, 0, 0, 0, 0, 0, 0), classifier = c("cl.nn.1", "cl.nn.3", "cl.nn.5", 
+"cl.nn.7", "cl.nn.9", "cl.nn.11", "cl.nn.13", "cl.nn.15")), .Names = c("acc.mean", 
+"acc.sd", "err.mean", "err.sd", "prec.mean", "prec.sd", "recall.mean", 
+"recall.sd", "fsc.mean", "fsc.sds", "classifier"), row.names = c(NA, 
+-8L), class = "data.frame")

@@ -17,32 +17,7 @@ get.mean.sd = function(exec, cls){
 }
 
 
-##########################################################################################################
-##########################################################################################################
 
-cross.validation = function(temp, cls){
-
-	aux = do.call("rbind", lapply(1:FOLDS, function(i){
-
-        #treinar svm com Train, e validar com teste
-        data.train = temp$train[[i]];
-        data.test = temp$test[[i]];
-	
-		obj = do.call(cls, list(data.train, data.test));
- 
-        test.acc  = acc.simple (obj$pred, data.test$Class);
-    	meas.acc = acc.multi.measures(obj$pred, data.test$Class);
-  
-		ret = c(test.acc, meas.acc);
-		ret = round(ret, 4);
-		return(ret);
-
-    })); 
-
-	aux = colMeans(aux);
-	return(aux);
-
-}
 
 ##########################################################################################################
 ##########################################################################################################

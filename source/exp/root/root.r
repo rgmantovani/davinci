@@ -1,25 +1,23 @@
 ##########################################################################################################
 ##########################################################################################################
 # Running 30 times ...
-root = function(data, dirs, filename) {
+root = function(data, dirs) {
 	
-	#Reading/Creating folds from data sampling
-	path = paste(dirs$folds.dir,"/", filename, sep="");
-	if(!file.exists(path)){
-		dir.create(path)
-	}
-
 	# Running 30 times, classifiers (mapply)
 	cat("/")
 	exec = lapply(1:EPOCHS, function(j){
-		res = pattern(data, path, filename, j);
+		res = pattern(data, j);
 		cat("=");
 		return(res);
 	});
 	cat("/\n");
 
 	#Saving results
-	dump("exec", file=paste(dirs$out.dir, "/complete-trace.RData", sep=""));
+	if(TBARS){
+		dump("exec", file = paste(dirs$out.dir, "/Tbars-", METHOD, "-complete-trace.RData",sep=""));
+	}else{
+		dump("exec", file = paste(dirs$out.dir, "/NoTbars-", METHOD, "-complete-trace.RData",sep=""));
+	}
 
 	aux = do.call("rbind", lapply(CLASSIFIERS, function(cls) {
 		ret = get.mean.sd(exec, cls)
@@ -38,21 +36,25 @@ root = function(data, dirs, filename) {
 ##########################################################################################################
 
 # Calling classifiers ...
-pattern = function(data, path, filename, i) {
+pattern = function(data, i) {
 
-	# dumped.file = paste(path, "/", "fold-", i, ".RData", sep="");
-	
-	# 9 - 1 permutation | load previous division
-	# if(!file.exists(dumped.file)){
-	folds = cfold(data);
-		# dump("folds", dumped.file);
-	# }else{
-		# folds = dget(dumped.file);
-	# }
-	
+	folds = NULL;
+	if(METHOD == "CV"){
+		folds = cfold(data);
+	}else if(METHOD == "LOO"){
+		folds = oneout(data);
+	}
+
 	# Running algorithms
 	exec = lapply(CLASSIFIERS, function(cls) {
-		ret = cross.validation(folds, cls);
+	
+		ret = NULL;
+		if(METHOD == "CV"){
+			ret = cross.validation(folds, cls);
+		}
+		else if(METHOD == "LOO"){
+			ret = leave.one.out(folds, cls);
+		}
 		return(ret);
 	});
 
@@ -60,6 +62,7 @@ pattern = function(data, path, filename, i) {
 	accr = do.call("rbind", exec)
 	colnames(accr) = c("accruacy","error", "precision", "recall", "fscore");
 	df = data.frame(accr);
+	df = round(df,3);
 	df$classifier = CLASSIFIERS;
 	
 	return(df);
