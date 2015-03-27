@@ -6,7 +6,7 @@ root = function(data, dirs) {
 	# Running 30 times, classifiers (mapply)
 	cat("/")
 	exec = lapply(1:EPOCHS, function(j){
-		res = pattern(data, j);
+		res = pattern(data);
 		cat("=");
 		return(res);
 	});
@@ -36,7 +36,7 @@ root = function(data, dirs) {
 ##########################################################################################################
 
 # Calling classifiers ...
-pattern = function(data, i) {
+pattern = function(data) {
 
 	folds = NULL;
 	if(METHOD == "CV"){

@@ -30,9 +30,11 @@ run = function() {
 
 	#Dataset with no Tbars
 	if(!TBARS){
-		cat(" ... not using Tbars attribute ... \n");
+		cat(" @TBARS attribute: not used ... \n");
 		data = data[,c(1,2,3,4,5,7)]; # comentar para usar o Tbars
-	} 
+	} else{
+		cat(" @TBARS attribute: use ... \n");
+	}
 
 	exit = root(data, dirs);
 

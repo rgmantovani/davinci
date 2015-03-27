@@ -10,7 +10,7 @@ cross.validation = function(temp, cls){
         data.test = temp$test[[i]];
 	
 		obj = do.call(cls, list(data.train, data.test));
- 
+ 		
         test.acc  = acc.simple (obj$pred, data.test$Class);
     	meas.acc = acc.multi.measures(obj$pred, data.test$Class);
   

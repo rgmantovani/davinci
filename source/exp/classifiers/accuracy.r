@@ -71,7 +71,8 @@ acc.auc = function(pred, test) {
 ################################################################################################
 # Simple Accuracy
 acc.simple = function(pred, test) {
-
+	
+	levels(pred) = levels(test);
 	t = table(pred, test)
 	acc_simple = sum(diag(t))/sum(t);
 	return(acc_simple);
@@ -85,10 +86,12 @@ acc.simple = function(pred, test) {
 
 acc.multi.measures = function(pred, test){
 
+	levels(pred) = levels(test);
 	confusion.matrix = table(pred, test)
 	final.matrix = vector("numeric", 4)
 	names(final.matrix) = c("error", "precision", "recall", "fscore")
 	
+
 	mat.res = matrix(0, nrow(confusion.matrix), 3)
 	rownames(mat.res) = colnames(confusion.matrix)
 	colnames(mat.res) = c("precision", "recall", "fscore")
@@ -123,4 +126,4 @@ acc.multi.measures = function(pred, test){
 }
 
 ################################################################################################
-################################################################################################
+###############################################################################################

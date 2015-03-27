@@ -1,0 +1,11 @@
+exit <-
+structure(list(acc.mean = c(0.699, 0.678533333333333), acc.sd = c(0.016467313496534, 
+0.0166479435062881), err.mean = c(0.301, 0.321466666666667), 
+    err.sd = c(0.0164673134965335, 0.0166479435062864), prec.mean = c(0.698133333333333, 
+    0.684233333333333), prec.sd = c(0.0159497774999823, 0.0160659917824575
+    ), recall.mean = c(0.719466666666667, 0.6922), recall.sd = c(0.0169578246273457, 
+    0.0163652280660878), fsc.mean = c(0.6979, 0.676666666666667
+    ), fsc.sds = c(0.0159467865101407, 0.0157815547796931), classifier = c("cl.fuzzy.w", 
+    "cl.fuzzy.chi")), .Names = c("acc.mean", "acc.sd", "err.mean", 
+"err.sd", "prec.mean", "prec.sd", "recall.mean", "recall.sd", 
+"fsc.mean", "fsc.sds", "classifier"), row.names = c(NA, -2L), class = "data.frame")
