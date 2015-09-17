@@ -58,17 +58,22 @@
 cl.fuzzy.w = function(train, test){
 
 	obj = NULL;
+	lv.train = levels(train$Class);
 	train$Class = as.integer(train$Class);
+
 	rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2);
 	
 	model = frbs.learn(train, rg.data, method.type = "FRBCS.W")#, control)
 	pred = predict(model, test[,-ncol(test)]);
 
 	pred[which(pred == 1)] = 0;
-	pred[which(pred == 2)] = 7;
-	pred[which(pred == 3)] = 14;
+	pred[which(pred == 2)] = 14;	
+	pred[which(pred == 3)] = 7;
 	
-	obj$pred = as.factor(pred);
+	pred = as.factor(as.character(pred));
+	names(pred) = rownames(test);
+	
+	obj$pred = pred;
 	obj$model = model;
 
 	return(obj);
@@ -90,6 +95,7 @@ cl.fuzzy.w = function(train, test){
 cl.fuzzy.chi = function(train, test){
 
 	obj = NULL;
+	# train$Class = as.integer(train$Class);
 	train$Class = as.integer(train$Class);
 	rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
 
@@ -97,10 +103,13 @@ cl.fuzzy.chi = function(train, test){
 	pred = predict(model, test[,-ncol(test)]);
 
 	pred[which(pred == 1)] = 0;
-	pred[which(pred == 2)] = 7;
-	pred[which(pred == 3)] = 14;
+	pred[which(pred == 3)] = 7;
+	pred[which(pred == 2)] = 14;
 	
-	obj$pred = as.factor(pred);
+	pred = as.factor(as.character(pred));
+	names(pred) = rownames(test);
+	
+	obj$pred = pred;
 	obj$model = model;
 
 	return(obj);

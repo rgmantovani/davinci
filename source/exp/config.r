@@ -16,7 +16,6 @@ require("infotheo");
 require("kknn");
 require("randomForest");
 require("R.utils");
-require("doParallel");
 require("caret");
 require("matrixStats");
 require("frbs");
@@ -25,20 +24,14 @@ require("frbs");
 ##########################################################################################################
 
 # list of classifiers
-# CLASSIFIERS = c("cl.c45", "cl.nb", "cl.nn", "cl.rf", "cl.svm", "cl.mlp");
+CLASSIFIERS = c("cl.c45", "cl.nb", "cl.nn", "cl.rf", "cl.svm", "cl.mlp", "cl.fuzzy.w", "cl.fuzzy.chi")
 
 # CLASSIFIERS = c("cl.nn.1", "cl.nn.3" ,"cl.nn.5" ,"cl.nn.7" ,"cl.nn.9", "cl.nn.11" ,"cl.nn.13" ,"cl.nn.15");
 
-CLASSIFIERS = c("cl.fuzzy.w", "cl.fuzzy.chi")#, "cl.fuzzy.gccl");
-
-
-#using TBARS
-# TBARS = TRUE;
-TBARS=FALSE;
+TBARS = c(TRUE, FALSE);
 
 #metodology
 METHOD = "CV";
-# METHOD = "LOO";
 
 # dataset folder
 DATABASE = "/database/";
