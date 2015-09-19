@@ -4,49 +4,70 @@
 require("reshape2");
 require("ggplot2");
 
+
+# data = dget("data/Alternativa/Tbars-CV-all-predictions.RData")
+# temp = data[[1]]
+
 ##########################################################################################################
 ##########################################################################################################
 
-hits.plot = function(data){
+hits.plot = function(data, prefix){
 
-	METRICS = c("STLG" , "STAT", "INF", "LANDM", 
-		"MODEL", "TIME", "COMP", "ALL", "FSELEC");
+	# Data frame colnames
+	ALGORITHMS = c("J48", "NB", "3NN", "RF", "SVM", "MLP", "FUZZY.W", "FUZZY.CHI");
 
-	ALGORITHMS = c("J48", "MLP", "NB", "3NN", "RF", "SVM", "ENS");
+	aux = lapply(1:length(data), function(k){
 
-	aux = lapply(1:9, function(i){
-		cn = paste(ALGORITHMS, METRICS[i], sep=".")
-		cn = c(cn, "Real");
-		df = data[[i]]$data;
-		colnames(df) = cn;
-		ret = abs(df[,1:7] - df[,8]);
+		df = data[[k]];
+		ret = abs(df[,1:8] - df[,9]);
+		for(i in 1:8){
+			ret[which( ret[,i] != 0), i] = 1;
+		}
 
-		hits.plot.aux(ret, METRICS[i], 3);
+		colnames(ret) = ALGORITHMS;
+		filename = paste(prefix, "-", k , sep="")
+		hits.plot.aux(ret, filename, 3);
 
 		return(ret);
 	});
 
-	full = do.call("cbind", aux);
-	hits.plot.aux(full, "Full", 9);
+	#plotar o somatorio dos erros
 }
 
+
 ##########################################################################################################
 ##########################################################################################################
 
-hits.plot.aux = function(full, filename, h){
+hits.plot.aux = function(ret, filename, h){
 
-	df = melt(full);
-	colnames(df) = c("Dataset", "Algorithm", "Errors");
+	ret$example = 1:nrow(ret);
+	df = melt(ret, id.vars=c(9));
+	colnames(df) = c("Example", "Algorithm", "Errors");
 
 	setEPS();
 	filename = paste("hits-", filename, ".eps", sep="");
 	postscript(filename, height=h, width=10);
-	g = ggplot(df, aes(x=Dataset, y=Algorithm, fill=Errors))
+	g = NULL;
+	g = ggplot(df, aes(x=Example, y=Algorithm, fill=Errors))
 	g = g + geom_tile() + scale_fill_gradient(low="darkgray", high="black", guide=FALSE)
 	print(g)
 	dev.off();
-
 }
+
+
+##########################################################################################################
+##########################################################################################################
+
+data = dget("data/Alternativa/Tbars-CV-all-predictions.RData")
+prefix = "Tbars";
+hits.plot(data, prefix);
+
+data2 = dget("data/Alternativa/NoTbars-CV-all-predictions.RData")
+prefix2 = "No-TBars";
+hits.plot(data, prefix2);
+
+
+
 
 ##########################################################################################################
 ##########################################################################################################
