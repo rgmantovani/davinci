@@ -24,7 +24,8 @@ run = function() {
 	dirs = creating.folders();
 
 	#TODO: make automatic to run in several files 
-	file = "Alternativa.arff";
+	# file = "Alternativa.arff";
+	file = "14day.arff"
 	filename =  gsub("*\\.(\\w*)", "\\", file);
 
 	cat("@File:",filename, "\n");
