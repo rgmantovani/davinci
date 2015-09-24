@@ -43,7 +43,8 @@ Type 'q()' to quit R.
 + 	dirs = creating.folders();
 + 
 + 	#TODO: make automatic to run in several files 
-+ 	file = "Alternativa.arff";
++ 	# file = "Alternativa.arff";
++ 	file = "14day.arff"
 + 	filename =  gsub("*\\.(\\w*)", "\\", file);
 + 
 + 	cat("@File:",filename, "\n");
@@ -158,7 +159,7 @@ The following object is masked from ‘package:kknn’:
 Loading required package: matrixStats
 matrixStats v0.14.2 (2015-06-23) successfully loaded. See ?matrixStats for help.
 Loading required package: frbs
-@File: Alternativa 
+@File: 14day 
 @Method: CV 
  @TBARS attribute: used ... 
 /==============================/
@@ -170,5 +171,5 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > ##########################################################################################################
 > 
 > proc.time()
-    user   system  elapsed 
-1994.516    1.620 1995.440 
+     user    system   elapsed 
+11604.181    11.008 11948.047 
