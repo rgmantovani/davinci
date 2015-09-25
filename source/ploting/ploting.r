@@ -3,7 +3,7 @@
 
 require("reshape2");
 require("ggplot2");
-
+require("scatterplot3d");
 
 # aux = unlist(lapply(1:nrow(data), function(i){
 # 	if(all(data[i,] != 0)){
@@ -13,6 +13,27 @@ require("ggplot2");
 
 ##########################################################################################################
 ##########################################################################################################
+
+classes.plot = function(dataset){
+ 
+	ret = princomp(dataset[, -ncol(dataset)]);
+	temp = data.frame(cbind(ret$scores[,1:3], dataset$Class))
+	temp$id = 1:nrow(dataset);
+	colnames(temp) = c("Comp1", "Comp2", "Comp3" ,"Class", "Id");
+
+	setEPS();
+	postscript("Classes.eps") #, height=4.5, width=10);
+
+	g = NULL;
+	g = scatterplot3d(x=temp[,1], y=temp[,2], z=temp[,3], color=factor(temp[ ,4]), 
+		 col.axis="blue", col.grid="lightblue", main="Distribution of classes", pch=20)	
+	print(g)
+	dev.off();
+}
+
+##########################################################################################################
+##########################################################################################################
+
 errors.plot = function(data, prefix){
 
 	# Data frame colnames
