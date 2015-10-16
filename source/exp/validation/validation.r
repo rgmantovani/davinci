@@ -23,7 +23,7 @@ holdout = function(data, p){
 # LOO - leave one out
 oneout = function(data) {
 
-    id = createFolds(data$Class, k=nrow(data), list=TRUE);
+    id = caret::createFolds(data$Class, k=nrow(data), list=TRUE);
 
     train = lapply(1:nrow(data), function(i) {
         subset(data, id %in% setdiff(1:nrow(data), i));
@@ -48,7 +48,7 @@ oneout = function(data) {
 
 cfold = function(data,  fold=FOLDS) {
 
-    lines = createFolds(data$Class, k=fold, list=TRUE);
+    lines = caret::createFolds(data$Class, k=fold, list=TRUE);
 
     test = lapply(1:fold, function (i){
         data[ lines[[i]], ]
@@ -70,7 +70,7 @@ cfold = function(data,  fold=FOLDS) {
 
 cfold.valid = function(data, fold=FOLDS){
 
-    id = createFolds(data$Class, k=fold, list=FALSE);
+    id = caret::createFolds(data$Class, k=fold, list=FALSE);
 
     #training folds
     train = lapply(1:fold, function(i) {

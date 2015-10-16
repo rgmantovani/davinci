@@ -18,14 +18,14 @@ cl.c45 = function(train, test) {
 ################################################################################################
 ################################################################################################
 
-cl.mlp = function(train, test) {
+cl.mlp = function(train, test, h=2) {
 
 	obj = NULL;
 	MLP = RWeka::make_Weka_classifier("weka/classifiers/functions/MultilayerPerceptron");
-	model = MLP(Class ~ ., train);
+	model = MLP(Class ~ ., train, control = RWeka::Weka_control(H=h))
 	pred = predict(model, test[,-ncol(test)], type="class");
 	names(pred) = row.names(test);
-	
+
 	obj$pred = pred;
 	obj$model = model;
 	return(obj);
