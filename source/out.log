@@ -1,5 +1,5 @@
 
-R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -17,6 +17,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+During startup - Warning message:
+Setting LC_CTYPE failed, using "C" 
 > ##########################################################################################################
 > # R Code
 > # Base experiment 
@@ -43,8 +45,8 @@ Type 'q()' to quit R.
 + 	dirs = creating.folders();
 + 
 + 	#TODO: make automatic to run in several files 
-+ 	# file = "Alternativa.arff";
-+ 	file = "14day.arff"
++ 	file = "Alternativa.arff";
++ 	# file = "14day.arff"
 + 	filename =  gsub("*\\.(\\w*)", "\\", file);
 + 
 + 	cat("@File:",filename, "\n");
@@ -104,13 +106,13 @@ Loading required package: FNN
 Loading required package: foreign
 Loading required package: infotheo
 
-Attaching package: ‘infotheo’
+Attaching package: 'infotheo'
 
-The following object is masked from ‘package:FNN’:
+The following object is masked from 'package:FNN':
 
     entropy
 
-The following object is masked from ‘package:CORElearn’:
+The following object is masked from 'package:CORElearn':
 
     discretize
 
@@ -124,52 +126,41 @@ Loading required package: R.methodsS3
 R.methodsS3 v1.7.0 (2015-02-19) successfully loaded. See ?R.methodsS3 for help.
 R.oo v1.19.0 (2015-02-27) successfully loaded. See ?R.oo for help.
 
-Attaching package: ‘R.oo’
+Attaching package: 'R.oo'
 
-The following objects are masked from ‘package:methods’:
+The following objects are masked from 'package:methods':
 
     getClasses, getMethods
 
-The following objects are masked from ‘package:base’:
+The following objects are masked from 'package:base':
 
     attach, detach, gc, load, save
 
 R.utils v2.1.0 (2015-05-27) successfully loaded. See ?R.utils for help.
 
-Attaching package: ‘R.utils’
+Attaching package: 'R.utils'
 
-The following object is masked from ‘package:utils’:
+The following object is masked from 'package:utils':
 
     timestamp
 
-The following objects are masked from ‘package:base’:
+The following objects are masked from 'package:base':
 
     cat, commandArgs, getOption, inherits, isOpen, parse, warnings
-
-Loading required package: caret
-Loading required package: lattice
-Loading required package: ggplot2
-
-Attaching package: ‘caret’
-
-The following object is masked from ‘package:kknn’:
-
-    contr.dummy
 
 Loading required package: matrixStats
 matrixStats v0.14.2 (2015-06-23) successfully loaded. See ?matrixStats for help.
 Loading required package: frbs
-@File: 14day 
+@File: Alternativa 
 @Method: CV 
  @TBARS attribute: used ... 
 /==============================/
  @TBARS attribute: not used ... 
 /==============================/
-There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > ##########################################################################################################
 > ##########################################################################################################
 > 
 > proc.time()
-     user    system   elapsed 
-11604.181    11.008 11948.047 
+    user   system  elapsed 
+21154.82     5.32 21181.91 
