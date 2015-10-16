@@ -18,6 +18,7 @@ require("randomForest");
 require("R.utils");
 require("matrixStats");
 require("frbs");
+require("PMCMR");			# Statistic Tests
 
 
 ##########################################################################################################
