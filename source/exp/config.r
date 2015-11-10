@@ -25,10 +25,10 @@ require("PMCMR");			# Statistic Tests
 ##########################################################################################################
 
 # list of classifiers
-# CLASSIFIERS = c("cl.c45", "cl.nb", "cl.nn", "cl.rf", "cl.svm", "cl.mlp", "cl.fuzzy.w", "cl.fuzzy.chi")
+ALL = c("cl.c45", "cl.nb", "cl.nn", "cl.rf", "cl.svm", "cl.mlp", "cl.fuzzy.w", "cl.fuzzy.chi")
 KNNS = paste("cl.nn.", seq(1,31, by=2), sep="")
 MLPS = paste("cl.mlp.", rep(2:50), sep="")
-CLASSIFIERS = c(MLPS, KNNS)
+CLASSIFIERS = c(ALL, MLPS, KNNS)
 
 
 TBARS = c(TRUE, FALSE);
