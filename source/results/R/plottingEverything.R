@@ -26,6 +26,29 @@ plottingEverything = function(data){
   hitsPlot(pred.tbars, prefix = "Tbars")
   hitsPlot(pred.no.tbars, prefix = "NoTbars")
 
+
+  mlp.tbars = lapply(data$meas.tbars, function(elem){
+    return(elem[9:57, 1:5])
+  })
+
+  mlp.no.tbars = lapply(data$meas.no.tbars, function(elem){
+    return(elem[9:57, 1:5])
+  })
+
+  MlpPlot(mlp.tbars, prefix = "Tbars")
+  MlpPlot(mlp.no.tbars, prefix = "NoTbars")
+
+  knn.tbars = lapply(data$meas.tbars, function(elem){
+    return(elem[58:73, 1:5])
+  })
+
+  knn.no.tbars = lapply(data$meas.no.tbars, function(elem){
+    return(elem[58:73, 1:5])
+  })
+
+  KnnPlot(knn.tbars, prefix = "Tbars")
+  KnnPlot(knn.no.tbars, prefix = "NoTbars")
+
 }
 
 ##########################################################################################################

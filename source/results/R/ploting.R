@@ -1,6 +1,78 @@
 ##########################################################################################################
 ##########################################################################################################
 
+KnnPlot = function(temp, prefix = NULL){
+
+	rr = array(unlist(temp), dim = c(nrow(temp[[1]]), ncol(temp[[1]]), length(temp)))
+	desvios = apply(rr, c(1,2), sd) 
+	colnames(desvios) = c("sd.Accuracy", "sd.Error", "sd.Precision", "sd.Recall", "sd.F-Score")
+
+	medias = Reduce("+", temp) / length(temp)
+	medias$hidden = seq(from=1, to=31, by = 2)
+	colnames(medias) = c("Accuracy", "Error", "Precision", "Recall", "F-Score", "Hidden")
+	
+	df = melt(medias, id.vars=c(2,6))
+	df$SD = c(desvios[,1], desvios[,3], desvios[,4], desvios[,5])
+	colnames(df) = c("Error", "Hidden_Units", "Measure", "Value", "SD")
+
+	setEPS();
+	filename = paste(prefix, "-KNN.eps", sep="")
+	postscript(filename, height=5, width=10);
+
+	g = NULL;
+	g = ggplot(df, aes(x=Hidden_Units, y=Value, fill=Measure, colour=Measure, 
+		linetype=Measure, shape=Measure))
+	g = g + geom_errorbar(aes(ymin=Value-SD, ymax=Value+SD), width=.1)
+  g = g +  geom_line() + geom_point()
+ 	g = g + scale_x_continuous("Hidden_Units", limits = c(1, 31))
+	g = g + ylab("Measure values") + xlab("Number of Nearest Neighbors");
+	g = g + ggtitle("k-NN performance");
+ 	print(g);
+
+	dev.off();
+
+}
+
+##########################################################################################################
+##########################################################################################################
+
+
+MlpPlot = function(temp, prefix = NULL){
+
+	rr = array(unlist(temp), dim = c(nrow(temp[[1]]), ncol(temp[[1]]), length(temp)))
+	desvios = apply(rr, c(1,2), sd) 
+	colnames(desvios) = c("sd.Accuracy", "sd.Error", "sd.Precision", "sd.Recall", "sd.F-Score")
+
+	medias = Reduce("+", temp) / length(temp)
+	medias$hidden = 2:(nrow(medias)+1)
+	colnames(medias) = c("Accuracy", "Error", "Precision", "Recall", "F-Score", "Hidden")
+	
+	df = melt(medias, id.vars=c(2,6))
+	df$SD = c(desvios[,1], desvios[,3], desvios[,4], desvios[,5])
+	colnames(df) = c("Error", "Hidden_Units", "Measure", "Value", "SD")
+
+	setEPS();
+	filename = paste(prefix, "-MLP.eps", sep="")
+	postscript(filename, height=5, width=10);
+
+	g = NULL;
+	g = ggplot(df, aes(x=Hidden_Units, y=Value, fill=Measure, colour=Measure, 
+		linetype=Measure, shape=Measure))
+	g = g + geom_errorbar(aes(ymin=Value-SD, ymax=Value+SD), width=.1)
+  g = g +  geom_line() + geom_point()
+ 	g = g + scale_x_continuous(limits = c(2, 50))
+ 	
+	g = g + ylab("Measure values") + xlab("Number of hidden units");
+	g = g + ggtitle("MLP performance");
+ 	print(g);
+	dev.off();
+
+}
+
+
+##########################################################################################################
+##########################################################################################################
+
 allErrorsPlot = function(data, prefix){
 
 	# Data frame colnames
