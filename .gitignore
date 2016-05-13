@@ -1,0 +1,14 @@
+
+*.pdf
+*.eps
+*.log
+*.RData
+*.csv
+*.zip
+
+output/
+misc/
+
+
+
+
