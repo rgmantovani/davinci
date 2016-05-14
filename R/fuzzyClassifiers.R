@@ -15,25 +15,27 @@
 
 cl.fuzzy.w = function(train, test) {
 
-	obj = NULL
-	lv.train = levels(train$Class)
 	train$Class = as.integer(train$Class)
 
-	rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
+	#FIX ME: not runing for datasets with just one attribute
+	if(ncol(test) == 2) {
+		temp = as.data.frame(test[,-ncol(test)])
+		colnames(temp) = colnames(test)[1]
+		aux = data.frame(train[, -ncol(train)])
+		colnames(aux) = colnames(train)[1]
+		rg.data = matrix(apply(aux, 2, range), nrow = 2)
+	} else {
+		temp = test[,-ncol(test)]
+		rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
+	}
 	
 	model = frbs.learn(train, rg.data, method.type = "FRBCS.W")
-	pred = predict(model, test[,-ncol(test)])
+	pred = predict(model, temp)
 
-	pred[which(pred == 1)] = 0
-	pred[which(pred == 2)] = 14	
-	pred[which(pred == 3)] = 7
-	
 	pred = as.factor(as.character(pred))
 	names(pred) = rownames(test)
 	
-	obj$pred = pred
-	obj$model = model
-
+	obj = list(pred = pred, model = model)
 	return(obj)
 }
 
@@ -46,23 +48,27 @@ cl.fuzzy.w = function(train, test) {
 # Chi-classifier
 cl.fuzzy.chi = function(train, test) {
 
-	obj = NULL
 	train$Class = as.integer(train$Class)
-	rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
+
+	#FIX ME: not runing for datasets with just one attribute
+	if(ncol(test) == 2) {
+		temp = as.data.frame(test[,-ncol(test)])
+		colnames(temp) = colnames(test)[1]
+		aux = data.frame(train[, -ncol(train)])
+		colnames(aux) = colnames(train)[1]
+		rg.data = matrix(apply(aux, 2, range), nrow = 2)
+	} else {
+		temp = test[,-ncol(test)]
+		rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
+	}
 
 	model = frbs.learn(train, rg.data, method.type = "FRBCS.CHI")
 	pred = predict(model, test[,-ncol(test)])
 
-	pred[which(pred == 1)] = 0
-	pred[which(pred == 3)] = 7
-	pred[which(pred == 2)] = 14
-	
 	pred = as.factor(as.character(pred))
 	names(pred) = rownames(test)
 	
-	obj$pred = pred
-	obj$model = model
-
+	obj = list(pred = pred, model = model)
 	return(obj)
 }
 

@@ -1,6 +1,8 @@
-@relation Dataset_L
+@relation R_data_frame
+
 @attribute L numeric
-@attribute Class numeric
+@attribute Class {1,2,3}
+
 @data
 54.7,1
 50.8,1

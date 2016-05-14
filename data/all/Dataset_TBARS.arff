@@ -1,6 +1,8 @@
-@relation Dataset_TBARS
+@relation R_data_frame
+
 @attribute TBARS numeric
-@attribute Class numeric
+@attribute Class {1,2,3}
+
 @data
 0.109,1
 0.222,1

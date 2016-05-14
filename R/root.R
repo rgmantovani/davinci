@@ -1,24 +1,19 @@
 ##########################################################################################################
 ##########################################################################################################
 # Running 30 times ...
-root = function(data, dirs, tbars) {
+root = function(data, filename) {
 	
 	# Running 30 times, classifiers 
 	cat("/")
 	exec = lapply(1:EPOCHS, function(epoch){
-		res = pattern(data)
+		obj = pattern(data)
+		save(obj, file = paste0("output/", filename, "/", epoch, "_execution.RData"))
 		cat("=")
-		return(res)
+		return(obj)
 	})
 	cat("/\n")
 
-	#Saving results
-	if(tbars){
-		dump("exec", file = paste(dirs$out.dir, "/Tbars-", METHOD, "-complete-trace.RData",sep=""))
-	}else{
-		dump("exec", file = paste(dirs$out.dir, "/NoTbars-", METHOD, "-complete-trace.RData",sep=""))
-	}
-
+	
 	all.meas = lapply(exec, function(elem) {return(elem$acc)})
 	all.pred = lapply(exec, function(elem) {return(elem$pred)})
 
@@ -31,12 +26,10 @@ root = function(data, dirs, tbars) {
 	colnames(df) = c("acc.mean", "acc.sd", "err.mean", "err.sd", "prec.mean", "prec.sd", 
 		"recall.mean", "recall.sd", "fsc.mean", "fsc.sds")
 	df$classifier = CLASSIFIERS
+	df$dataset = filename
 
-	obj = NULL
-	obj$df = df
-	obj$allmeasures = all.meas
-	obj$allpredictions = all.pred
-
+	obj = list(df = df, allmeasures = all.meas, allpredictions = all.pred)
+	save(obj, file = paste0("output/", filename, "/final_results.RData"))
 	return(obj)
 }
 
@@ -50,19 +43,28 @@ pattern = function(data) {
 	
 	# Running algorithms
 	exec = lapply(CLASSIFIERS, function(cls){
-		ret = cross.validation(folds, cls)
+		ret = crossValidation(folds, cls)
 		return(ret)
 	})
 
-	# measures
-	accr = do.call("rbind", lapply(exec, function(elem) {return(elem$measures)}))
+	# Extract Measures
+	accr = do.call("rbind", 
+		lapply(exec, function(elem) {
+			return(elem$measures)
+		})
+	)
 	colnames(accr) = c("accruacy", "error", "precision", "recall", "fscore")
+
 	df = data.frame(accr)
 	df = round(df,3)
 	df$classifier = CLASSIFIERS
 	
-	#predictions
-	predictions = do.call("cbind", lapply(exec, function(elem) {return(elem$predictions)}))
+	# Extract Predictions
+	predictions = do.call("cbind", 
+		lapply(exec, function(elem) {
+			return(elem$predictions)
+		})
+	)
 	predictions = cbind(predictions, data$Class)
 	
 	predictions[which(predictions == 1)] = 0
@@ -72,10 +74,7 @@ pattern = function(data) {
 	df2 = data.frame(predictions)
 	colnames(df2) = c(CLASSIFIERS, "Class")
 
-	obj = NULL
-	obj$acc = df
-	obj$pred = df2
-
+	obj = list(acc = df, pred = df2)
 	return(obj)
 }
 

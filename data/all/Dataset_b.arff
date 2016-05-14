@@ -1,6 +1,8 @@
-@relation Dataset_b
+@relation R_data_frame
+
 @attribute b numeric
-@attribute Class numeric
+@attribute Class {1,2,3}
+
 @data
 12.2,1
 12,1

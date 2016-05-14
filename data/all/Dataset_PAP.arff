@@ -1,6 +1,8 @@
-@relation Dataset_PAP
+@relation R_data_frame
+
 @attribute PAP numeric
-@attribute Class numeric
+@attribute Class {1,2,3}
+
 @data
 25.75,1
 22.08,1
