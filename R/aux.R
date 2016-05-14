@@ -3,17 +3,19 @@
 
 get.mean.sd = function(exec, cls) {
 
-	ret = do.call("rbind", lapply(exec, function(element){
-		id = which((element)$classifier == cls)
-		return(element[id,])
-	}))
+  ret = do.call("rbind", 
+    lapply(exec, function(element) {
+      id = which((element)$classifier == cls)
+      return(element[id,])
+    })
+  )
 
-	n = 1:(ncol(ret)-1)
-	means = colMeans(ret[,n])
-	sdsd = colSds(as.matrix(ret[,n]))
+  n = 1:(ncol(ret)-1)
+  means = colMeans(ret[,n])
+  sdsd = colSds(as.matrix(ret[,n]))
 	
-	ret = c(means,sdsd)[ order( c(seq_along(means), seq_along(sdsd)))]
-	return(ret)
+  ret = c(means,sdsd)[ order( c(seq_along(means), seq_along(sdsd)))]
+  return(ret)
 }
 
 ##########################################################################################################

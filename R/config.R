@@ -23,15 +23,15 @@ require("PMCMR")			# Statistic Tests
 ##########################################################################################################
 
 # list of classifiers
-ALL = c("cl.c45", "cl.nb", "cl.nn", "cl.rf", "cl.svm", "cl.mlp")
+ALL   = c("cl.c45", "cl.nb", "cl.nn", "cl.rf", "cl.svm", "cl.mlp")
 FUZZY = c("cl.fuzzy.w", "cl.fuzzy.chi")
-KNNS = paste("cl.nn.", seq(1,31, by=2), sep="")
-MLPS = paste("cl.mlp.", rep(2:50), sep="")
+KNNS  = paste("cl.nn.", seq(1,31, by=2), sep="")
+MLPS  = paste("cl.mlp.", rep(2:50), sep="")
 
 CLASSIFIERS = c(ALL) #, FUZZY, MLPS, KNNS)
 
 # epochs to run
-EPOCHS = 2#30
+EPOCHS = 30
 
 # number of folds
 FOLDS = 10 

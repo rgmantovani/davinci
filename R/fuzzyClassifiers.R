@@ -15,28 +15,28 @@
 
 cl.fuzzy.w = function(train, test) {
 
-	train$Class = as.integer(train$Class)
+  train$Class = as.integer(train$Class)
 
-	#FIX ME: not runing for datasets with just one attribute
-	if(ncol(test) == 2) {
-		temp = as.data.frame(test[,-ncol(test)])
-		colnames(temp) = colnames(test)[1]
-		aux = data.frame(train[, -ncol(train)])
-		colnames(aux) = colnames(train)[1]
-		rg.data = matrix(apply(aux, 2, range), nrow = 2)
-	} else {
-		temp = test[,-ncol(test)]
-		rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
-	}
+  #FIX ME: not runing for datasets with just one attribute
+  if(ncol(test) == 2) {
+    temp = as.data.frame(test[,-ncol(test)])
+    colnames(temp) = colnames(test)[1]
+    aux = data.frame(train[, -ncol(train)])
+    colnames(aux) = colnames(train)[1]
+    rg.data = matrix(apply(aux, 2, range), nrow = 2)
+  } else {
+    temp = test[,-ncol(test)]
+    rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
+  }
 	
-	model = frbs.learn(train, rg.data, method.type = "FRBCS.W")
-	pred = predict(model, temp)
+  model = frbs.learn(train, rg.data, method.type = "FRBCS.W")
+  pred = predict(model, temp)
 
-	pred = as.factor(as.character(pred))
-	names(pred) = rownames(test)
+  pred = as.factor(as.character(pred))
+  names(pred) = rownames(test)
 	
-	obj = list(pred = pred, model = model)
-	return(obj)
+  obj = list(pred = pred, model = model)
+  return(obj)
 }
 
 ################################################################################################
@@ -48,28 +48,28 @@ cl.fuzzy.w = function(train, test) {
 # Chi-classifier
 cl.fuzzy.chi = function(train, test) {
 
-	train$Class = as.integer(train$Class)
+  train$Class = as.integer(train$Class)
 
-	#FIX ME: not runing for datasets with just one attribute
-	if(ncol(test) == 2) {
-		temp = as.data.frame(test[,-ncol(test)])
-		colnames(temp) = colnames(test)[1]
-		aux = data.frame(train[, -ncol(train)])
-		colnames(aux) = colnames(train)[1]
-		rg.data = matrix(apply(aux, 2, range), nrow = 2)
-	} else {
-		temp = test[,-ncol(test)]
-		rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
-	}
+  #FIX ME: not runing for datasets with just one attribute
+  if(ncol(test) == 2) {
+    temp = as.data.frame(test[,-ncol(test)])
+    colnames(temp) = colnames(test)[1]
+    aux = data.frame(train[, -ncol(train)])
+    colnames(aux) = colnames(train)[1]
+    rg.data = matrix(apply(aux, 2, range), nrow = 2)
+  } else {
+   temp = test[,-ncol(test)]
+   rg.data = matrix(apply(train[, -ncol(train)], 2, range), nrow = 2)
+  }
 
-	model = frbs.learn(train, rg.data, method.type = "FRBCS.CHI")
-	pred = predict(model, test[,-ncol(test)])
+  model = frbs.learn(train, rg.data, method.type = "FRBCS.CHI")
+  pred = predict(model, test[,-ncol(test)])
 
-	pred = as.factor(as.character(pred))
-	names(pred) = rownames(test)
+  pred = as.factor(as.character(pred))
+  names(pred) = rownames(test)
 	
-	obj = list(pred = pred, model = model)
-	return(obj)
+  obj = list(pred = pred, model = model)
+  return(obj)
 }
 
 ################################################################################################
