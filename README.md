@@ -62,21 +62,22 @@ Barbon, A.P.A.C.; Barbon Jr, S.; Mantovani, R.G.; Fuzyi, E.M.; Peres, L.M.; Brid
 **Storage time prediction of pork by Computational Intelligence**. 
 In: *Computers and Electronics in Agriculture* (2016). vol 127, September, p 368 - 375.
 
-Follows the bibtex:
+The bibtex entry:
 
 ```
 @article{Barbon2016368,
-title = "Storage time prediction of pork by Computational Intelligence",
-journal = "Computers and Electronics in Agriculture",
-volume = "127",
-number = "",
-pages = "368 - 375",
-year = "2016",
-note = "",
-issn = "0168-1699",
-doi = "http://dx.doi.org/10.1016/j.compag.2016.06.028",
-url = "http://www.sciencedirect.com/science/article/pii/S0168169916304306",
-author = "Ana Paula A.C. Barbon and Sylvio Barbon Jr. and Rafael Gomes Mantovani and Estef\^ania Mayumi Fuzyi and Louise Manha Peres and Ana Maria Bridi",
+  title   = "Storage time prediction of pork by Computational Intelligence",
+  journal = "Computers and Electronics in Agriculture",
+  volume  = "127",
+  number  = "",
+  pages   = "368 - 375",
+  year    = "2016",
+  note    = "",
+  issn    = "0168-1699",
+  doi     = "http://dx.doi.org/10.1016/j.compag.2016.06.028",
+  url     = "http://www.sciencedirect.com/science/article/pii/S0168169916304306",
+  author  = "Ana Paula A.C. Barbon and Sylvio Barbon Jr. and Rafael Gomes Mantovani and 
+    Estef\^ania Mayumi Fuzyi and Louise Manha Peres and Ana Maria Bridi",
 }
 
 ``` 
