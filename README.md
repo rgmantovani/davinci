@@ -2,8 +2,7 @@ Da Vinci
 =====
 
 '*Da Vinci*' is a research project that applies Machine Learning (ML) classification algorithms to solve a food quality problem. 
-The algorithms investigated are: C4.5 Decision Tree (via 'RWeka' package and through J48 implementation) (DT), Multilayer Perceptron (MLP), 
-Naive Bayes (NB), k-Nearest Neighbors (k-NN), Random Forest (RF), Suppor Vector Machines (SVM) and a Fuzzy rule-based system (Fuzzy-RBS).
+The algorithms investigated are: C4.5 Decision Tree (via 'RWeka' package and through J48 implementation) (DT), Multilayer Perceptron (MLP), Naive Bayes (NB), k-Nearest Neighbors (k-NN), Random Forest (RF), Support Vector Machines (SVM) and a Fuzzy rule-based system (Fuzzy-RBS).
 
 ### Technical Requirements
 
