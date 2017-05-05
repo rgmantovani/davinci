@@ -39,7 +39,7 @@ the execution and errors checking directly the log file.
 
 If you want to run experiments directly through the R script, you can call the command:
 
-````
+```
 R CMD BATCH --no-save --no-restore mainDaVinci.R outDaVinci.log &
 ```
 
